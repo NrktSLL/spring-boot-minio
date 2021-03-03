@@ -23,7 +23,7 @@ mvn clean install && docker-compose up -d
 * Spring Boot Actuator
 * Spring Boot Web
 * Sringdoc OpenApi (openapi-ui + openapi-hateoas)
-* jlefebure minio
+* Jlefebure Minio
 * Mapstruct
 * Lombok
 * Jackson Dataformat Xml
