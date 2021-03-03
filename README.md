@@ -13,13 +13,9 @@
 *  Docker Compose
 
 ## Installation
->Container creation with [Jib](https://github.com/GoogleContainerTools/jib) 
+>Container creation with [Buildpacks](https://buildpacks.io/) 
 ```
-mvn package
-```
-
-```
-docker-compose up -d
+mvn clean install && docker-compose up -d
 ```
 
 ## Used Dependencies
@@ -35,7 +31,6 @@ docker-compose up -d
 ## Abilities
 * Content Negotiation Support(Json,Xml,Hal Support)
 * MinIO Storage
-* Jib (build)
 
 ## Swagger
 > **Access : http://localhost:8080/api/documentation/**

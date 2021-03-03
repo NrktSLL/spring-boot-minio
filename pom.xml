@@ -23,8 +23,7 @@
         <jackson-dataformat-xml.version>2.11.3</jackson-dataformat-xml.version>
         <lombok-mapstruct-binding.version>0.1.0</lombok-mapstruct-binding.version>
         <minio-version>1.4</minio-version>
-        <jib-maven-plugin.version>2.8.0</jib-maven-plugin.version>
-        <jib-docker-image>adoptopenjdk:11-jre-hotspot</jib-docker-image>
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <dependencies>
@@ -89,6 +88,28 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build-image</goal>
+                        </goals>
+                        <configuration>
+                            <layers>
+                                <enabled>true</enabled>
+                            </layers>
+                            <image>
+                                <name>${project.name}-ex:${project.version}</name>
+                                <cleanCache>true</cleanCache>
+                            </image>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
@@ -118,30 +139,6 @@
                         </compilerArg>
                     </compilerArgs>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib-maven-plugin.version}</version>
-                <configuration>
-                    <from>
-                        <image>${jib-docker-image}</image>
-                    </from>
-                    <to>
-                        <image>${project.name}-ex:${project.version}</image>
-                    </to>
-                    <container>
-                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-                    </container>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>dockerBuild</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
